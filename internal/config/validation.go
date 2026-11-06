@@ -414,7 +414,7 @@ func validateTransport(transport string) error {
 
 func validateBackend(backend string) error {
 	switch backend {
-	case BackendSOCKS, BackendSSH, BackendDirect:
+	   case BackendSOCKS, BackendSSH, BackendDirect, "external":
 		return nil
 	}
 	return fmt.Errorf("unknown backend: %s", backend)
