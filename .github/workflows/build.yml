@@ -1,0 +1,21 @@
+name: build
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - name: Build linux/amd64
+        run: CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o slipgate-linux-amd64 .
+      - uses: actions/upload-artifact@v4
+        with:
+          name: slipgate-linux-amd64
+          path: slipgate-linux-amd64
